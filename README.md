@@ -2,7 +2,6 @@
 A live printer game for TikTok
 
 [![HitCount](https://hits.dwyl.com/alexdhg/tiktok-printer-live.svg?style=flat&show=unique)](http://hits.dwyl.com/alexdhg/tiktok-printer-live)
-[![Downloads](https://pepy.tech/badge/download)](https://pepy.tech/project/download)
 
 ## How To
 
