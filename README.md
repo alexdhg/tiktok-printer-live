@@ -38,3 +38,9 @@ A live printer game for TikTok
 ### Important
 
 It currently has romanian words & translated words, but you can easily change it to what language you like. You just need some time.
+
+You can leave it AFK, stream with OBS if you have a stream key from TikTok or just point the PC's screen through TikTok mobile livestreaming.
+
+Also, it can generate you a profit, have fun!
+
+### Please, star this project if you found it useful!
