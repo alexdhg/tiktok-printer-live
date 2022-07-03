@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Tiktok Printer</title>
+		<meta name="description" content="Tiktok Printer Guess Words Game">
+		<meta name="author" content="adierebel">
+		<link rel="stylesheet" href="../assets/css/reset.css?v=1.0">
+		<link rel="stylesheet" href="../assets/css/style.css?v=1.0">
+		<script type="text/javascript" src="words_en.js"></script>
+		<script type="text/javascript" src="msg_en.js"></script>
+		<script type="text/javascript" src="../assets/tts/speakClient.js"></script>
+		<script type="text/javascript" src="../assets/js/jquery.js"></script>
+		<script type="text/javascript" src="../assets/js/socket.io.js"></script>
+		<script type="text/javascript" src="../assets/js/connection.js"></script>
+		<script type="text/javascript" src="../assets/js/app.js"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div class="info">
+				<div class="mb-3">
+					<a href="/">MENU</a>
+				</div>
+				<table class="mb-3">
+					<tr><td>Canvas</td><td>&nbsp;:&nbsp;</td><td id="gameSize">&infin;</td></tr>
+					<tr><td>Chat Status</td><td>&nbsp;:&nbsp;</td><td id="stateText">Not Connected</td></tr>
+					<tr><td>Game Timeout</td><td>&nbsp;:&nbsp;</td><td id="gameTimeout">&infin;</td></tr>
+					<tr><td>Remain Words</td><td>&nbsp;:&nbsp;</td><td id="gameWords">&infin;</td></tr>
+				</table>
+				<div class="mb-3">
+					<button id="btnPrepare">START GAME</button>
+				</div>
+				<div class="text-bold">Printing Settings:</div>
+				<table class="mt-2 mb-3">
+					<tr><td><input id="confComment" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td>Comment</td></tr>
+					<tr><td><input id="confLike" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td>Like</td></tr>
+					<tr><td><input id="confShare" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td>Share &amp; Follow</td></tr>
+					<tr><td><input id="confJoin" type="checkbox"/>&nbsp;&nbsp;</td><td>User Joined</td></tr>
+					<tr><td colspan="2"><button id="btnSave" class="mt-2">SAVE</button></td></tr>
+				</table>
+				<div class="text-bold">Live Chat</div>
+				<div class="mb-3 mt-2">
+					<input id="targetUsername" type="text" placeholder="Enter @username" style="width:140px;"/>
+					<button id="targetConnect">Connect</button>
+				</div>
+				<div>
+					<audio id="sfx1" class="d-block">
+						<source src="../assets/sounds/printer_comment.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx2" class="d-block">
+						<source src="../assets/sounds/printer_gift.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx3" class="d-block">
+						<source src="../assets/sounds/printer_winner.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx4" class="d-block">
+						<source src="../assets/sounds/yey.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="tts" class="d-block"></audio>
+				</div>
+			</div>
+			<div class="container">
+				<video class="background" autoplay muted loop>
+					<source src="../assets/media/background.mp4" type="video/mp4">
+				</video>
+				<div class="printer">
+					<table class="table">
+						<tr>
+							<td id="paperContainer">
+								<div id="paper" class="paper"></div>
+							</td>
+						</tr>
+						<tr class="bottom-container">
+							<td class="bottom-wrapper">
+								<div class="bottom-bar">
+									<div class="bottom-content">
+										<div id="textGuess" class="text-guess blink">***</div>
+										<div class="text-caption">💬 Scrie <span class="text-bold">cuvantul</span></div>
+										<div class="text-caption" style="margin-bottom: 0rem;">🙋‍♀️🙋‍♂️ Ghiceste cuvantul pentru a-ti printa poza de profil</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!-- <div class="animation"></div> -->
+			</div>
+		</div>
+	</body>
+</html>

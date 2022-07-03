@@ -1,0 +1,159 @@
+.debug * {
+	outline: 2px solid red;
+}
+.main {
+	background-color: #ccc;
+}
+.main .info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 1rem;
+}
+.main .container {
+	background-color: #fff;
+	width: 360px;
+	height: 100vh;
+	margin: auto;
+}
+.background {
+	position:fixed;
+	top:0;
+	bottom:0;
+	object-fit: cover;
+	display:absolute;
+	z-index: 1;
+}
+.printer {
+	background-image: url('../media/printer.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: contain;
+	background-position-x: center;
+	background-position-y: center;
+	height: 100vh;
+	width: 100%;
+	z-index: 1000;
+	position: fixed;
+}
+.printer .table {
+	width: 100%;
+	height: 100%;
+}
+.printer .paper {
+	width: 60%;
+	margin: auto;
+	transform: perspective(500px) rotateX(12deg);
+	margin-top: -9%;
+	filter: grayscale(1);
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.printer .item {
+	border-top: 2px dashed black;
+	overflow-wrap: break-word !important;
+	word-break: break-all !important;
+}
+.bottom-container {
+	height: 32%;
+}
+.bottom-container .bottom-wrapper {
+	padding: 2rem;
+}
+.bottom-container .bottom-wrapper .bottom-bar {
+	background: #fff;
+	border-radius: 0.5rem;
+	width: 100%;
+	height: 100%;
+}
+.bottom-container .bottom-wrapper .bottom-bar .bottom-content {
+	padding: .75rem;
+}
+.mb-3 {
+	margin-bottom: 1rem;
+}
+.mt-2 {
+	margin-top: .5rem
+}
+.d-block {
+	display: block;
+}
+.text-guess {
+	font-weight: bold;
+	padding: .5rem .75rem;
+	text-align: center;
+	font-size: 1.7rem;
+	color: #e53935;
+	border-radius: 5px;
+	border: 2px solid #e53935;
+	text-transform: uppercase;
+}
+.text-winner {
+	font-weight: bold;
+	color: #512da8;
+	margin-top: .25rem;
+	overflow-wrap: break-word !important;
+	word-break: break-all !important;
+	font-size: 1.3rem;
+}
+.text-bold {
+	font-weight: bold;
+}
+.text-center {
+	text-align: center;
+}
+.text-caption {
+	font-size: 1.1rem;
+	text-align: center;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.printer .item {
+	font-size: 1.1rem;
+	padding: 1rem .5rem;
+}
+@media only screen and (min-width: 1400px) {
+	.text-caption {
+		font-size: 1.7rem;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
+	.text-guess {
+		font-size: 2.3rem;
+	}
+	.printer .item {
+		font-size: 1.4rem;
+		padding: 1.5rem .75rem;
+	}
+}
+.animation {
+	background: linear-gradient(-45deg, #d66745, #1885ad, #b8265e, #16b48f);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+	z-index: 2000;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	opacity: .4;
+}
+.blink {
+	animation: blinker 1s infinite;
+}
+
+@keyframes blinker {
+	from { opacity: 1.0; }
+	50% { opacity: 0.25; }
+	to { opacity: 1.0; }
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
