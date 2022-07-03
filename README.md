@@ -32,3 +32,9 @@ A live printer game for TikTok
 - Easy to use and multi platform
 - With sound effect
 - Integrated TTS engine
+
+---
+
+### Important
+
+It currently has romanian words & translated words, but you can easily change it to what language you like. You just need some time.
