@@ -1,3 +1,3 @@
-var MSG_GIFT = "Mersi |username| pentru cadou";
-var MSG_WINNER = "Felicitari lui |username| pentru castigarea rundei.";
-var MSG_TEST = "verik";
+var MSG_GIFT = "Thank you |username| for the gift!";
+var MSG_WINNER = "Congratulations to |username| for winning the round!";
+var MSG_TEST = "test message";
