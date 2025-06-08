@@ -195,7 +195,8 @@ function checkWinner(data, msg) {
             playSound(4);
 
             // Play TTS
-            let tssMsg = MSG_WINNER.replace("|username|", data.uniqueId);
+            let userName = (data.user && (data.user.uniqueId || data.user.nickname)) ? (data.user.uniqueId || data.user.nickname) : 'Unknown';
+            let tssMsg = MSG_WINNER.replace("|username|", userName);
             speakTTS(tssMsg);
 
             // Reload game
@@ -255,7 +256,7 @@ function addContent(payload) {
 
 function addMessage(data, msg) {
     // DATA
-    let userName = data.uniqueId;
+    let userName = (data.user && (data.user.uniqueId || data.user.nickname)) ? (data.user.uniqueId || data.user.nickname) : 'Unknown';
     let message = sanitize(msg);
 
     // Check for voice
@@ -278,6 +279,30 @@ function addMessage(data, msg) {
     }
 }
 
+function addGift(data) {
+    let userName = (data.user && (data.user.uniqueId || data.user.nickname)) ? (data.user.uniqueId || data.user.nickname) : 'Unknown';
+    let giftName = data.gift && data.gift.name ? data.gift.name : 'gift';
+    let repeatCount = data.repeatCount || 1;
+    let msg;
+    if (typeof MSG_GIFT !== 'undefined') {
+        msg = MSG_GIFT.replace('|username|', userName);
+    } else {
+        console.warn('MSG_GIFT is undefined! Did you forget to include msg_en.js?');
+        msg = userName + ' sent a gift!';
+    }
+    msg += ` <span class='gift-highlight'>🎁 ${repeatCount} × ${sanitize(giftName)}</span>`;
+    addContent(`<span class='gift-message'>${msg}</span>`);
+    playSound(2);
+}
+
+function addPhoto(data, reason) {
+    // Get username and profile photo
+    let userName = (data.user && (data.user.uniqueId || data.user.nickname)) ? (data.user.uniqueId || data.user.nickname) : 'Unknown';
+    let photoUrl = (data.user && data.user.profilePictureUrl) ? data.user.profilePictureUrl : '/assets/img/image.png';
+    let label = reason === 'winner' ? '🏆 Winner!' : '';
+    // Add to chat area
+    addContent(`<span class='photo-message'><img src='${photoUrl}' alt='${userName}' class='profile-photo'/> <span class='photo-label'>${label}</span> <span class='photo-username'>${userName}</span></span>`);
+}
 
 // New chat comment received
 connection.on('chat', (data) => {
@@ -287,18 +312,23 @@ connection.on('chat', (data) => {
 
 // New gift received
 connection.on('gift', (data) => {
-    if (!isPendingStreak(data) && data.diamondCount > 0) {
-        addGift(data);
-    }
+    console.log('Gift event received:', data);
+    addGift(data);
 })
 
 // Like
 connection.on('like', (data) => {
     if (typeof data.totalLikeCount === 'number') {
-        // Check setting
         if (confLike) {
-            // Print like
-            addMessage(data, data.label.replace('{0:user}', '').replace('likes', `${data.likeCount} likes`));
+            let label = typeof data.label === 'string' ? data.label : '';
+            let msg = label.replace('{0:user}', '');
+            if (msg.includes('likes')) {
+                msg = msg.replace('likes', `${data.likeCount} likes`);
+            }
+            // Only add message if not empty after replacements
+            if (msg.trim() !== '') {
+                addMessage(data, msg);
+            }
         }
     }
 })
@@ -308,7 +338,8 @@ connection.on('social', (data) => {
     // Check setting
     if (confShare) {
         // Print share
-        addMessage(data, data.label.replace('{0:user}', ''));
+        let label = typeof data.label === 'string' ? data.label : '';
+        addMessage(data, label.replace('{0:user}', ''));
     }
 })
 
