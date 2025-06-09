@@ -1,9 +1,11 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-const express = require('express');
-const { createServer } = require('http');
-const { Server } = require('socket.io');
-const { TikTokConnectionWrapper, getGlobalConnectionCount } = require('./connectionWrapper');
+import express from 'express';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import { TikTokConnectionWrapper, getGlobalConnectionCount } from './connectionWrapper.js';
+import { WebcastEvent } from 'tiktok-live-connector';
 
 const app = express();
 const httpServer = createServer(app);
@@ -45,19 +47,19 @@ io.on('connection', (socket) => {
         tiktokConnectionWrapper.once('disconnected', reason => socket.emit('tiktokDisconnected', reason));
 
         // Notify client when stream ends
-        tiktokConnectionWrapper.connection.on('streamEnd', () => socket.emit('streamEnd'));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.STREAM_END, () => socket.emit('streamEnd'));
 
-        // Redirect message events
-        tiktokConnectionWrapper.connection.on('roomUser', msg => socket.emit('roomUser', msg));
-        tiktokConnectionWrapper.connection.on('member', msg => socket.emit('member', msg));
-        tiktokConnectionWrapper.connection.on('chat', msg => socket.emit('chat', msg));
-        tiktokConnectionWrapper.connection.on('gift', msg => socket.emit('gift', msg));
-        tiktokConnectionWrapper.connection.on('social', msg => socket.emit('social', msg));
-        tiktokConnectionWrapper.connection.on('like', msg => socket.emit('like', msg));
-        tiktokConnectionWrapper.connection.on('questionNew', msg => socket.emit('questionNew', msg));
-        tiktokConnectionWrapper.connection.on('linkMicBattle', msg => socket.emit('linkMicBattle', msg));
-        tiktokConnectionWrapper.connection.on('linkMicArmies', msg => socket.emit('linkMicArmies', msg));
-        tiktokConnectionWrapper.connection.on('liveIntro', msg => socket.emit('liveIntro', msg));
+        // Redirect message events using new WebcastEvent enum
+        tiktokConnectionWrapper.connection.on(WebcastEvent.ROOM_USER, msg => socket.emit('roomUser', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.MEMBER, msg => socket.emit('member', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.CHAT, msg => socket.emit('chat', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.GIFT, msg => socket.emit('gift', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.SOCIAL, msg => socket.emit('social', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.LIKE, msg => socket.emit('like', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.QUESTION_NEW, msg => socket.emit('questionNew', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.LINK_MIC_BATTLE, msg => socket.emit('linkMicBattle', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.LINK_MIC_ARMIES, msg => socket.emit('linkMicArmies', msg));
+        tiktokConnectionWrapper.connection.on(WebcastEvent.LIVE_INTRO, msg => socket.emit('liveIntro', msg));
     });
 
     socket.on('disconnect', () => {

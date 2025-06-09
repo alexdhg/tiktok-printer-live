@@ -157,3 +157,49 @@
 		background-position: 0% 50%;
 	}
 }
+.gift-message {
+    display: inline-block;
+    background: #fffbe6;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    margin: 0.25em 0;
+    font-weight: bold;
+    color: #b8860b;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
+}
+.gift-highlight {
+    color: #d2691e;
+    font-weight: bold;
+    margin-left: 0.5em;
+    font-size: 1.1em;
+}
+.photo-message {
+    display: flex;
+    align-items: center;
+    background: #e6f7ff;
+    border: 2px solid #1890ff;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    margin: 0.25em 0;
+    font-weight: bold;
+    color: #0050b3;
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.10);
+}
+.profile-photo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 0.75em;
+    border: 2px solid #ffd700;
+    background: #fff;
+}
+.photo-label {
+    margin-right: 0.5em;
+    color: #faad14;
+    font-size: 1.1em;
+}
+.photo-username {
+    color: #0050b3;
+    font-weight: bold;
+}
